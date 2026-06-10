@@ -1,0 +1,223 @@
+{
+  "info": {
+    "_postman_id": "c7a8b34f-0d92-411a-ab57-7977eb7efb5a",
+    "name": "GitHub Profile Analyzer API",
+    "description": "Postman Collection for testing the GitHub Profile Analyzer API, including profile analysis, listing, filtering, and stats retrieval endpoints.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "System Health",
+      "item": [
+        {
+          "name": "Check Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "health"
+              ]
+            },
+            "description": "Checks database connectivity and API status."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Profile Analysis",
+      "item": [
+        {
+          "name": "Analyze & Save Profile",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/profile/analyze/:username",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "profile",
+                "analyze",
+                ":username"
+              ],
+              "variable": [
+                {
+                  "key": "username",
+                  "value": "octocat",
+                  "description": "GitHub Username to analyze"
+                }
+              ]
+            },
+            "description": "Fetches raw profile details from GitHub, computes custom insights, saves to MySQL database, and returns the saved record."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Stored Profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/profile/:username",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "profile",
+                ":username"
+              ],
+              "variable": [
+                {
+                  "key": "username",
+                  "value": "octocat",
+                  "description": "GitHub username to retrieve from DB"
+                }
+              ]
+            },
+            "description": "Retrieves the previously computed analysis from the database."
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Analyzed Profiles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/profile/all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "profile",
+                "all"
+              ]
+            },
+            "description": "Fetches list of all profiles that have been analyzed and stored in the database."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Statistics & Rankings",
+      "item": [
+        {
+          "name": "Get Top Followed Profiles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/profile/stats/top-followed?limit=5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "profile",
+                "stats",
+                "top-followed"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "5",
+                  "description": "Number of profiles to return"
+                }
+              ]
+            },
+            "description": "Lists stored profiles ordered by followers count descending."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Top Repositories Profiles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/profile/stats/top-repos?limit=5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "profile",
+                "stats",
+                "top-repos"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "5",
+                  "description": "Number of profiles to return"
+                }
+              ]
+            },
+            "description": "Lists stored profiles ordered by public repositories count descending."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Popular Profiles (Score)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/profile/stats/popular?limit=5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "profile",
+                "stats",
+                "popular"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "5",
+                  "description": "Number of profiles to return"
+                }
+              ]
+            },
+            "description": "Lists stored profiles ordered by computed popularity score descending."
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000/api",
+      "type": "string"
+    }
+  ]
+}
