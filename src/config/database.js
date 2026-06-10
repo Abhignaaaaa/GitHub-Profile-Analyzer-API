@@ -6,12 +6,11 @@ console.log('DB_PORT=', process.env.DB_PORT);
 console.log('DB_USER=', process.env.DB_USER);
 console.log('DB_NAME=', process.env.DB_NAME);
 
-const dbHost = process.env.DB_HOST || '127.0.0.1';
-const dbPort = process.env.DB_PORT || '3306';
-const dbUser = process.env.DB_USER || 'root';
-const dbPassword = process.env.DB_PASSWORD || '';
-const dbName = process.env.DB_NAME || 'github_analyzer';
-const nodeEnv = process.env.NODE_ENV || 'development';
+const dbHost = (process.env.DB_HOST || '127.0.0.1').trim();
+const dbPort = (process.env.DB_PORT || '3306').trim();
+const dbUser = (process.env.DB_USER || 'root').trim();
+const dbPassword = (process.env.DB_PASSWORD || '').trim();
+const dbName = (process.env.DB_NAME || 'github_analyzer').trim();
 
 let sequelize;
 
